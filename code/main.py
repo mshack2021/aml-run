@@ -130,7 +130,7 @@ def main():
 
     # Reading the dataset
     print("::debug::Reading the dataset")
-    ws = run.experiment.workspace
+    # ws = run.experiment.workspace
     store = ws.get_default_datastore()
     train = Dataset.Tabular.from_delimited_files(
         (store, 'histogram/train.csv'))
