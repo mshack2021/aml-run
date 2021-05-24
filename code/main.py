@@ -150,7 +150,7 @@ def main():
 
 
 #     dataset = Dataset.get_by_name(ws, name='Histogram')
-    datastore.upload(src_dir="histogram/train.csv",target_path="histogram/train.csv", overwrite=True)
+    datastore.upload(src_dir="data/histogram", target_path="histogram", overwrite=True)
     dataset = Dataset.Tabular.from_delimited_files(path=(datastore, "histogram/train.csv"))
     dataset.register(ws, name="Histogram", create_new_version=True)
     
