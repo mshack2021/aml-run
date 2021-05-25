@@ -150,6 +150,7 @@ def main():
 
 
 #     dataset = Dataset.get_by_name(ws, name='Histogram')
+    dataset=None
     try:
         datastore.upload(src_dir="data/histogram", target_path="histogram", overwrite=True)
         print(f"::debug:: dataset path: {datastore.path('histogram/train.csv').path_on_datastore}")
