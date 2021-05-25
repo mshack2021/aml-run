@@ -153,8 +153,8 @@ def main():
     dataset=None
     try:
         datastore.upload(src_dir="data/histogram", target_path="histogram", overwrite=True)
-        print(f"::debug:: dataset path: {datastore.path('histogram/train.csv').path_on_datastore}")
-        dataset = Dataset.Tabular.from_delimited_files(datastore.path("histogram/train.csv"))
+        print(f"::debug:: dataset path: {datastore.path('histogram/train_small.csv').path_on_datastore}")
+        dataset = Dataset.Tabular.from_delimited_files(datastore.path("histogram/train_small.csv"))
         dataset.register(ws, name="Histogram", create_new_version=True)
     except Exception as ex:
         print(f"::debug:: exception when handling the data f{ex}")
