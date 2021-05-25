@@ -15,7 +15,7 @@ from schemas import azure_credentials_schema, parameters_schema
 from azureml.core.dataset import Dataset
 from azureml.train.automl import AutoMLConfig
 from azureml.core.compute import ComputeTarget, AmlCompute
-
+import pandas as pd
 
 def main():
     # Loading azure credentials
@@ -150,14 +150,16 @@ def main():
 
 
 #     dataset = Dataset.get_by_name(ws, name='Histogram')
-    dataset=None
-    try:
-        datastore.upload(src_dir="data/histogram", target_path="histogram", overwrite=True)
-        print(f"::debug:: dataset path: {datastore.path('histogram/train_small.csv').path_on_datastore}")
-        dataset = Dataset.Tabular.from_delimited_files(datastore.path("histogram/train_small.csv"), validate=False)
-        dataset.register(ws, name="Histogram", create_new_version=True)
-    except Exception as ex:
-        print(f"::debug:: exception when handling the data f{ex}")
+#     dataset=None
+#     try:
+#         datastore.upload(src_dir="data/histogram", target_path="histogram", overwrite=True)
+#         print(f"::debug:: dataset path: {datastore.path('histogram/train_small.csv').path_on_datastore}")
+#         dataset = Dataset.Tabular.from_delimited_files(datastore.path("histogram/train_small.csv"), validate=False)
+#         register_pandas_dataframe(dataframe, target, name, description=None, tags=None, show_progress=True)
+#     except Exception as ex:
+#         print(f"::debug:: exception when handling the data f{ex}")
+    df=pd.read_csv('data/histogram/train.csv')
+    dataset = Dataset.Tabular.register_pandas_dataframe(df, (datastore, "data/train.csv"), "Histogram")    
     
     label_column_name = 'class'
 
